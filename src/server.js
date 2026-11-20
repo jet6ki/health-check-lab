@@ -23,3 +23,16 @@ app.get('/orders', async (req, res) => {
 app.listen(port, () => {
   console.log(`Orders API running on port ${port}`);
 });
+
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
+app.get('/ready', async (req, res) => {
+  try {
+    await db.ping(); // Replace with the repo's actual DB check method
+    res.status(200).send('READY');
+  } catch (err) {
+    res.status(503).send('NOT READY');
+  }
+});
