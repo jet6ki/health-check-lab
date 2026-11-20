@@ -1,18 +1,11 @@
-version: '3.8'
-
 services:
-  orders-api:
-    build: .
-    ports:
-      - "3000:3000"
-    services:
   orders-api:
     build: .
     ports:
       - "3000:3000"
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:3000/ready"]
       interval: 10s
       timeout: 3s
       start_period: 20s
